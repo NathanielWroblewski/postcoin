@@ -5,8 +5,7 @@ class EmailProcessor < ActiveRecord::Base
       Email.create(
         to: recipient[:email],
         from: email.from,
-        subject: email.subject,
-        body: email.body
+        subject: email.subject
       )
     end
   end
