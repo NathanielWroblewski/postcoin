@@ -9,6 +9,7 @@ gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby',
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'ffi'
+gem 'foundation-rails'
 gem 'griddler'
 gem 'haml'
 gem 'httparty'
