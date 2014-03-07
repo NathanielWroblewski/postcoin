@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306063918) do
+ActiveRecord::Schema.define(version: 20140307082433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.text    "address"
+    t.integer "user_id", null: false
+  end
 
   create_table "emails", force: true do |t|
     t.string "to"
@@ -35,6 +40,8 @@ ActiveRecord::Schema.define(version: 20140306063918) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "private_key",                         null: false
+    t.text     "public_key",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

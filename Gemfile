@@ -11,6 +11,7 @@ gem 'devise'
 gem 'ffi'
 gem 'griddler'
 gem 'haml'
+gem 'httparty'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 4.0.0'
 gem 'turbolinks'
@@ -28,6 +29,7 @@ end
 group :test do
   gem 'factory_girl'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :production do
