@@ -57,6 +57,7 @@ GEM
     execjs (2.0.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
+    ffi (1.9.3)
     griddler (0.6.3)
       htmlentities
       rails (>= 3.2.0)
@@ -167,6 +168,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   factory_girl
+  ffi
   griddler
   haml
   jquery-rails
