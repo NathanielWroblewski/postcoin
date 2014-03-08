@@ -4,5 +4,5 @@ Postcoin::Application.routes.draw do
   devise_for :users
   resources :users
 
-  get '/amounts', to: 'pages#amount', as: :amount_page
+  get '/amounts', to: 'pages#amounts', as: :amount_page
 end

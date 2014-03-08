@@ -46,6 +46,12 @@ share_examples_for AmountParsable do
       expect(model.parse(subject)).to eq 20_000_000_000
     end
 
+    it 'converts ฿ prefixed amounts into satoshis' do
+      subject = '฿200'
+
+      expect(model.parse(subject)).to eq 20_000_000_000
+    end
+
     it 'converts USD suffixed amounts into satoshis' do
       subject = '200 USD'
 
@@ -54,6 +60,12 @@ share_examples_for AmountParsable do
 
     it 'converts USD suffixed amounts into satoshis' do
       subject = '$ 200'
+
+      expect(model.parse(subject)).to eq 29537298
+    end
+
+    it 'converts USD suffixed amounts into satoshis' do
+      subject = '$200'
 
       expect(model.parse(subject)).to eq 29537298
     end
