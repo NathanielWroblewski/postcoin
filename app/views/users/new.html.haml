@@ -44,4 +44,7 @@
     = image_tag 'emailscreenshot.png'
 .row.footer
   .small-8.small-centered.columns
-    %p.center Facebook | Twitter
+    %p.center
+      =link_to 'Facebook', '#', class: 'js-fb-share'
+      |
+      =link_to 'Twitter', 'https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.postco.in&text=Tip%20your%20friends%20over%20email%20with%20http%3A%2F%2Fwww.postco.in&tw_p=tweetbutton&url=%2F'

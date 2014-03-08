@@ -1,0 +1,12 @@
+$('.js-fb-share').on 'click', (e) ->
+  e.preventDefault()
+  FB.ui(
+    method: 'feed'
+    name: 'PostCoin'
+    caption: 'Send bitcoin via email'
+    description: 'Tip your friends over email with PostCoin.'
+    link: 'http://www.postco.in'
+    picture: '<%= path_to_image "email.jpg" %>'
+  , (response) ->
+    response
+  )
