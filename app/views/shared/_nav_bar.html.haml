@@ -1,0 +1,12 @@
+%nav
+  .row
+    .small-12.medium-8.small-centered.columns
+      %ul
+        %li
+          = link_to root_path do
+            = render 'shared/email.svg'
+        - if user_signed_in?
+          %li yo
+        - else
+          %li= link_to 'Sign Up', new_user_registration_path
+          %li= link_to 'Sign In', new_user_session_path

@@ -1,0 +1,17 @@
+.row
+  .small-8.small-centered.columns
+    %h2.center Sign Up
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .small-8.small-centered.columns
+        = devise_error_messages!
+        = f.label :email
+        = f.email_field :email, autofocus: true
+
+        = f.label :password
+        = f.password_field :password
+
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+        .center
+          = f.submit 'Sign up', class: 'button'
