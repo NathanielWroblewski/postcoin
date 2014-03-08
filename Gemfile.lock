@@ -69,6 +69,10 @@ GEM
       rails (>= 3.2.0)
     haml (4.0.5)
       tilt
+    haml_coffee_assets (1.16.0)
+      coffee-script (~> 2.0)
+      sprockets (~> 2.0)
+      tilt (~> 1.1)
     hike (1.2.3)
     htmlentities (4.3.1)
     httparty (0.13.0)
@@ -185,6 +189,7 @@ DEPENDENCIES
   foundation-rails
   griddler
   haml
+  haml_coffee_assets
   httparty
   jquery-rails
   pg

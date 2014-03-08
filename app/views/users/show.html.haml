@@ -1,8 +1,15 @@
 .row
   .small-12.small-centered.columns
     %h2.center MY ACCOUNT
-    %br
-    %br
+    %h3.center
+      = @balance.to_f / 100_000_000
+      BTC
+    %p.center
+      = link_to 'Deposit', '#', id: 'deposit'
+      |
+      = link_to 'Withdraw', ''
+    %p#address.center.hidden
+      = current_user.addresses.last.to_s
   .small-8.small-centered.columns
     %h3 SENT EMAILS
     - if current_user.sent_emails.any?
@@ -28,3 +35,8 @@
       %br
     - else
       %p You have not sent any emails yet.
+
+:coffee
+  $('#deposit').on 'click', (e) ->
+    e.preventDefault()
+    $('#address').removeClass 'hidden'
