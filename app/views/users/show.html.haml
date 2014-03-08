@@ -7,7 +7,7 @@
     %p.center
       = link_to 'Deposit', '#', id: 'deposit'
       |
-      = link_to 'Withdraw', ''
+      = link_to 'Withdraw', new_transaction_path
     %p#address.center.hidden
       = current_user.addresses.last.to_s
   .small-8.small-centered.columns

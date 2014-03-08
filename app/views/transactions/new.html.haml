@@ -1,0 +1,12 @@
+.row
+  .small-8.small-centered.columns
+    %h2.center WITHDRAW
+
+    = form_tag transactions_path do |f|
+      .small-8.small-centered.columns
+        = label_tag :address
+        = text_field_tag :address
+        = label_tag :amount, 'Amount in Satoshis'
+        = number_field_tag :amount
+        .center
+          = submit_tag 'Sign up', class: 'button'

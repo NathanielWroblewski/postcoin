@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || current_user || root_path
   end
+
+  def fetch_balance(address)
+    response = HTTParty.get("http://mainnet.helloblock.io/addresses/#{address}")
+    response['data']['address']['balance']
+  end
 end

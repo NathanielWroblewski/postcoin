@@ -3,6 +3,7 @@ Postcoin::Application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :transactions, only: [:new, :create]
 
   get '/amounts', to: 'pages#amounts', as: :amount_page
 end
