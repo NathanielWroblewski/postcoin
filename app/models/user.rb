@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   before_validation :generate_keys, on: :create
   after_create :generate_address
+  after_create :generate_password, unless: :encrypted_password?
+  after_create :send_email_notification
 
   validates :private_key, presence: true
   validates :public_key,  presence: true
@@ -20,5 +22,15 @@ class User < ActiveRecord::Base
 
   def generate_address
     addresses.create(address: Bitcoin.pubkey_to_address(public_key))
+  end
+
+  def generate_password
+    generated_password = Devise.friendly_token.first(8)
+    update_attributes(password: generated_password)
+    RegistrationMailer.welcome(id, generated_password).deliver
+  end
+
+  def send_email_notification
+
   end
 end
