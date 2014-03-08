@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_many :received_emails, class_name: 'Email', foreign_key: :recipient_id
 
   before_validation :generate_keys, on: :create
+  before_validation :generate_password, on: :create, unless: :password
   after_create :generate_address
-  after_create :generate_password, unless: :encrypted_password?
   after_create :send_email_notification
 
   validates :private_key, presence: true
@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
 
   def generate_password
     generated_password = Devise.friendly_token.first(8)
-    update_attributes(password: generated_password)
-    RegistrationMailer.welcome(id, generated_password).deliver
+    self.password = generated_password
+    RegistrationMailer.welcome(email, generated_password).deliver
   end
 
   def send_email_notification

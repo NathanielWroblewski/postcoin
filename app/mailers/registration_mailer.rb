@@ -1,11 +1,11 @@
 class RegistrationMailer < ActionMailer::Base
 
-  default from: 'PostCoin <cc@postco.in>'
+  default from: 'PostCoin <info@postco.in>'
 
-  def welcome(user_id, generated_password=nil)
-    @user = User.find(user_id)
+  def welcome(email, generated_password=nil)
+    @email = email
     @generated_password = generated_password
 
-    mail(to: @user.email, subject: 'Account created at PostCoin')
+    mail(to: @email, subject: 'Account created at PostCoin')
   end
 end
