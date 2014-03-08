@@ -91,3 +91,16 @@ nav {
   margin-top: 3em;
   margin-bottom: 2em;
 }
+
+/* Account page */
+
+.email {
+  p {
+    margin-bottom: 0;
+    padding: 1em;
+  }
+
+  &:nth-child(even) {
+    background-color: $background-grey;
+  }
+}

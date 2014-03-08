@@ -1,5 +1,20 @@
 require 'spec_helper'
 
+describe User, 'associations' do
+  it { expect(subject).to have_many(:addresses) }
+  it { expect(subject).to have_many(:sent_emails) }
+  it { expect(subject).to have_many(:received_emails) }
+
+  it 'has many sent and received emails' do
+    user = create(:user)
+    received_email = Email.create(recipient_id: user.id, subject: '$10')
+    sent_email = Email.create(sender_id: user.id, subject: '$10')
+
+    expect(user.sent_emails).to include sent_email
+    expect(user.received_emails).to include received_email
+  end
+end
+
 describe User, 'validations' do
   it { expect(subject).to validate_presence_of(:email) }
   it { expect(subject).to validate_presence_of(:password) }

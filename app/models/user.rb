@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :addresses
+  has_many :sent_emails, class_name: 'Email', foreign_key: :sender_id
+  has_many :received_emails, class_name: 'Email', foreign_key: :recipient_id
 
   before_validation :generate_keys, on: :create
   after_create :generate_address

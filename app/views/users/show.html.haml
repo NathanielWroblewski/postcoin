@@ -1,0 +1,30 @@
+.row
+  .small-12.small-centered.columns
+    %h2.center MY ACCOUNT
+    %br
+    %br
+  .small-8.small-centered.columns
+    %h3 SENT EMAILS
+    - if current_user.sent_emails.any?
+      - current_user.sent_emails.each do |email|
+        .email
+          %p
+            = email.to
+            %span.right.black
+              = email.subject
+      %br
+      %br
+    - else
+      %p You have not sent any emails yet.
+    %h3 RECEIVED EMAILS
+    - if current_user.received_emails.any?
+      - current_user.received_emails.each do |email|
+        .email
+          %p
+            = email.from
+            %span.right.black
+              = email.subject
+      %br
+      %br
+    - else
+      %p You have not sent any emails yet.

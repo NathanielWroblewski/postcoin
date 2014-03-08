@@ -3,6 +3,7 @@ require 'spec_helper'
 describe EmailProcessor, 'process' do
   it 'creates an email for each recipient' do
     email = create(:email)
+    create(:user, email: email.from)
 
     EmailProcessor.process(email)
 
