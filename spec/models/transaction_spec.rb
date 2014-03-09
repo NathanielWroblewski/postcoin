@@ -92,15 +92,15 @@ describe Transaction, '#spend' do
   end
 
   it 'sends bitcoin to the recipient and change to the sender' do
-    transaction.stub(:total).and_return(30_000)
-    transaction.stub(:amount).and_return(10_000)
+    transaction.stub(:total).and_return(50_000)
+    transaction.stub(:amount).and_return(20_000)
     transaction.stub(:send)
 
     transaction.spend
 
-    expect(transaction).to have_received(:send).with(btc: 10_000, to: recipient)
+    expect(transaction).to have_received(:send).with(btc: 20_000, to: recipient)
     expect(transaction).to have_received(:send).with(
-      btc: 30_000 - (fee + 10_000), to: sender
+      btc: 50_000 - (fee + 20_000), to: sender
     )
   end
 end
@@ -134,7 +134,8 @@ describe Transaction, '#initialize' do
   end
 
   it 'builds a transaction' do
-    Transaction.any_instance.stub(:build_tx)
+    Transaction.any_instance.stub(:build_tx).and_return(transaction)
+    Transaction.any_instance.stub(:propagate)
 
     transaction = Transaction.new(TEST_TRANSACTION_ATTRS)
 

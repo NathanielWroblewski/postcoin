@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe EmailProcessor, 'process' do
   it 'creates an email for each recipient' do
+    Email.any_instance.stub(:create_transaction)
     email = create(:email)
     create(:user, email: email.from)
 

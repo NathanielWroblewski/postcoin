@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
   end
 
   def fetch_unspents(address)
-    url = "http://mainnet.helloblock.io/addresses/#{address}/unspents"
+    url = "http://#{ENV['HELLOBLOCK_ENV']}.helloblock.io/addresses/#{address}/unspents"
     response = HTTParty.get(url)
     response['data']['unspents'].map do |unspent|
       [unspent['scriptPubKey']].pack('H*')

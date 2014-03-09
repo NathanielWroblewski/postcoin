@@ -52,7 +52,7 @@ class Transaction
   end
 
   def propagate(transaction_hex)
-    url = "http://mainnet.helloblock.io/transactions"
+    url = "http://#{ENV['HELLOBLOCK_ENV']}.helloblock.io/transactions"
     HTTParty.post(url, body: { rawTxHex: transaction_hex })
   end
 end

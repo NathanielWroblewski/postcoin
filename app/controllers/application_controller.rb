@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_balance(address)
-    response = HTTParty.get("http://mainnet.helloblock.io/addresses/#{address}")
+    response = HTTParty.get("http://#{ENV['HELLOBLOCK_ENV']}.helloblock.io/addresses/#{address}")
     response['data']['address']['balance']
   end
 end

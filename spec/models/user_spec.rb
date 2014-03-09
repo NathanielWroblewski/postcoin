@@ -6,9 +6,11 @@ describe User, 'associations' do
   it { expect(subject).to have_many(:received_emails) }
 
   it 'has many sent and received emails' do
+    Email.any_instance.stub(:create_transaction)
     user = create(:user)
-    received_email = Email.create(recipient_id: user.id, subject: '$10')
-    sent_email = Email.create(sender_id: user.id, subject: '$10')
+    recipient = create(:user)
+    received_email = Email.create(recipient_id: user.id, subject: '$10', to: user.email)
+    sent_email = Email.create(sender_id: user.id, subject: '$10', to: 'blah@blah.com')
 
     expect(user.sent_emails).to include sent_email
     expect(user.received_emails).to include received_email
@@ -16,8 +18,9 @@ describe User, 'associations' do
 end
 
 describe User, 'validations' do
+  before(:each) { RegistrationMailer.stub_chain(:welcome, :deliver) }
+
   it { expect(subject).to validate_presence_of(:email) }
-  it { expect(subject).to validate_presence_of(:password) }
 end
 
 describe User, '#generate_keys' do

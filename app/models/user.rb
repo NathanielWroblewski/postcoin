@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   before_validation :generate_keys, on: :create
   before_validation :generate_password, on: :create, unless: :password
   after_create :generate_address
-  after_create :send_email_notification
 
   validates :private_key, presence: true
   validates :public_key,  presence: true
@@ -28,9 +27,5 @@ class User < ActiveRecord::Base
     generated_password = Devise.friendly_token.first(8)
     self.password = generated_password
     RegistrationMailer.welcome(email, generated_password).deliver
-  end
-
-  def send_email_notification
-
   end
 end
