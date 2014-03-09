@@ -6,7 +6,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-
     Transaction.new(
       private_key: current_user.private_key,
       sender_address: current_user.addresses.last.to_s,

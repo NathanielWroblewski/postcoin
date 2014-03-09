@@ -35,7 +35,8 @@ class Transaction
 
   def spend
     change = total - (amount + FEE)
-    addresses = { recipient_address => amount, sender_address => change }
+    addresses = { recipient_address => amount }
+    addresses.merge!({ sender_address => change }) if change > FEE # avoid minimal transactions
     addresses.each{ |address, bitcoin| send(btc: bitcoin, to: address) }
   end
 
