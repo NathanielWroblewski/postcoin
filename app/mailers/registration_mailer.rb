@@ -1,6 +1,6 @@
 class RegistrationMailer < ActionMailer::Base
 
-  default from: 'PostCoin <info@postco.in>'
+  default from: 'info@postco.in'
 
   def welcome(email, generated_password=nil)
     @email = email
