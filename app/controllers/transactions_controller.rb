@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
 
   def create
     Transaction.new(
-      private_key: current_user.private_key,
+      private_key: Bitcoin::Key.from_base58(current_user.private_key),
       sender_address: current_user.addresses.last.to_s,
       unspents: fetch_unspents(current_user.addresses.last.to_s),
       amount: params[:amount].to_i,
@@ -30,7 +30,8 @@ class TransactionsController < ApplicationController
     url = "http://#{ENV['HELLOBLOCK_ENV']}.helloblock.io/addresses/#{address}/unspents"
     response = HTTParty.get(url)
     response['data']['unspents'].map do |unspent|
-      [unspent['scriptPubKey']].pack('H*')
+      unspent['scriptPubKey'] = [unspent['scriptPubKey']].pack('H*')
+      unspent
     end
   end
 end

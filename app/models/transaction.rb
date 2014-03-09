@@ -13,7 +13,7 @@ class Transaction
     @sender_address    = sender_address
     @recipient_address = recipient_address
     transaction_hex    = build_tx{ |transaction| prepare transaction }
-    propagate transaction_hex.to_payload.unpack('H*')
+    propagate transaction_hex.to_payload.unpack('H*')[0]
   end
 
   def prepare(transaction)
@@ -27,7 +27,7 @@ class Transaction
 
   def withdraw(unspent)
     transaction.input do |input|
-      input.prev_out(unspent[:txHash], unspent[:index], unspent[:scriptPubKey])
+      input.prev_out(unspent['txHash'], unspent['index'], unspent['scriptPubKey'])
       input.signature_key(private_key)
     end
   end
@@ -47,7 +47,7 @@ class Transaction
   end
 
   def sufficient_funds?
-    @total = unspents.map{|unspent| unspent[:value]}.reduce(:+)
+    @total = unspents.map{|unspent| unspent['value']}.reduce(:+)
     (amount + FEE) <= total
   end
 

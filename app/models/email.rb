@@ -11,10 +11,10 @@ class Email < ActiveRecord::Base
     recipient   = User.find_or_create_by(email: to)
     amount      = parse(subject)
     Transaction.new(
-      private_key: sender.private_key,
+      private_key: Bitcoin::Key.from_base58(sender.private_key),
       sender_address: sender.addresses.last.to_s,
       amount: parse(subject),
-      recipient_address: recipient.addresses.last,
+      recipient_address: recipient.addresses.last.to_s,
       unspents: fetch_unspents(sender.addresses.last.to_s)
     )
   end
@@ -23,7 +23,8 @@ class Email < ActiveRecord::Base
     url = "http://#{ENV['HELLOBLOCK_ENV']}.helloblock.io/addresses/#{address}/unspents"
     response = HTTParty.get(url)
     response['data']['unspents'].map do |unspent|
-      [unspent['scriptPubKey']].pack('H*')
+      unspent['scriptPubKey'] = [unspent['scriptPubKey']].pack('H*')
+      unspent
     end
   end
 end

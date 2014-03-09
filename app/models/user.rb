@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   validates :public_key,  presence: true
 
   def generate_keys
-    self.private_key, self.public_key = Bitcoin.generate_key
+    private_key, self.public_key = Bitcoin.generate_key
+    self.private_key = Bitcoin::Key.new(private_key).to_base58
   end
 
   def generate_address

@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/lian/bitcoin-ruby
   revision: 03c7beeab8753b8171348c8243a59f5d58577021
-  branch: master
+  ref: 03c7b
   specs:
     bitcoin-ruby (0.0.5)
 

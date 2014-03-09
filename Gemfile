@@ -5,7 +5,7 @@ gem 'rails', '4.0.3'
 gem 'pg'
 
 gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby',
-                    branch: 'master', require: 'bitcoin'
+                    ref: '03c7b', require: 'bitcoin'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'figaro'
