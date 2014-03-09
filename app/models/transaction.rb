@@ -13,7 +13,6 @@ class Transaction
     @sender_address    = sender_address
     @recipient_address = recipient_address
     transaction_hex    = build_tx{ |transaction| prepare transaction }
-    binding.pry
     propagate transaction_hex.to_payload.unpack('H*')
   end
 
