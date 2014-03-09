@@ -12,7 +12,9 @@ class Transaction
     @private_key       = private_key
     @sender_address    = sender_address
     @recipient_address = recipient_address
-    build_tx{ |transaction| prepare transaction }
+    transaction_hex    = build_tx{ |transaction| prepare transaction }
+    binding.pry
+    propagate transaction_hex.to_payload.unpack('H*')
   end
 
   def prepare(transaction)
@@ -47,5 +49,10 @@ class Transaction
   def sufficient_funds?
     @total = unspents.map{|unspent| unspent[:value]}.reduce(:+)
     (amount + FEE) <= total
+  end
+
+  def propagate(transaction_hex)
+    url = "http://testnet.helloblock.io/transactions"
+    HTTParty.post(url, body: { rawTxHex: transaction_hex })
   end
 end
